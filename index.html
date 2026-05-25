@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小柳 裕太郎 — 自己紹介</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #f0d080;
+    --gold-dark: #7a5c1e;
+    --bg-dark: #0a0a12;
+    --bg-section: #0e0e1a;
+    --bg-card: #12121e;
+    --white: #f5f0e8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-dark);
+    color: var(--white);
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── Stars ── */
+  #stars-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--dur) ease-in-out infinite alternate;
+    opacity: 0;
+  }
+  @keyframes twinkle {
+    from { opacity: 0.05; transform: scale(0.8); }
+    to   { opacity: 0.6;  transform: scale(1.2); }
+  }
+
+  /* ── Top line ── */
+  #top-line {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 4s linear infinite;
+    z-index: 200;
+  }
+  @keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(10,10,18,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .nav-name {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--gold-light);
+    letter-spacing: 0.1em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(201,168,76,0.6);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* ── Layout ── */
+  main {
+    position: relative;
+    z-index: 1;
+  }
+
+  section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 40px 80px;
+    position: relative;
+  }
+  section:nth-child(even) { background: rgba(255,255,255,0.012); }
+
+  /* ── Section label ── */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 16px auto 32px;
+  }
+  .divider-long {
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    margin: 16px auto;
+  }
+
+  /* ── Typography ── */
+  h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(52px, 9vw, 100px);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    line-height: 1.15;
+    letter-spacing: 0.1em;
+  }
+  h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    color: var(--gold-light);
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+  .subtitle {
+    font-size: clamp(14px, 2vw, 20px);
+    color: var(--gold);
+    letter-spacing: 5px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  /* ── Hero ── */
+  #hero {
+    background: radial-gradient(ellipse at 50% 40%, rgba(201,168,76,0.07) 0%, transparent 65%);
+  }
+  .hero-frame {
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 60px 80px;
+    position: relative;
+    text-align: center;
+    max-width: 700px;
+    width: 100%;
+  }
+  .hero-frame::before, .hero-frame::after {
+    content: '';
+    position: absolute;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+  .hero-frame::before { inset: 8px; }
+  .corner {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-color: var(--gold);
+    border-style: solid;
+  }
+  .tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+  .tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+  .bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+  .br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+  /* ── Profile table ── */
+  .info-table {
+    border-collapse: collapse;
+    margin-top: 8px;
+    min-width: 360px;
+  }
+  .info-table tr {
+    border-bottom: 1px solid rgba(201,168,76,0.18);
+    transition: background 0.2s;
+  }
+  .info-table tr:last-child { border-bottom: none; }
+  .info-table tr:hover { background: rgba(201,168,76,0.05); }
+  .info-table td {
+    padding: 14px 20px;
+    font-size: clamp(13px, 1.8vw, 17px);
+  }
+  .info-table td:first-child {
+    color: var(--gold);
+    letter-spacing: 3px;
+    font-weight: 700;
+    text-align: right;
+    white-space: nowrap;
+    font-size: clamp(11px, 1.3vw, 13px);
+    width: 120px;
+  }
+  .info-table td:last-child {
+    color: var(--white);
+    padding-left: 28px;
+  }
+
+  /* ── Cards ── */
+  .cards {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+    max-width: 800px;
+    width: 100%;
+  }
+  .card {
+    background: linear-gradient(145deg, #1c1c2e, #12122a);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 12px;
+    padding: 28px 32px;
+    flex: 1;
+    min-width: 260px;
+    max-width: 360px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(201,168,76,0.12);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .card-title {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .card p, .card ul {
+    font-size: 14px;
+    line-height: 2;
+    color: #c8bfa8;
+  }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li {
+    padding-left: 18px;
+    position: relative;
+  }
+  .card ul li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--gold-dark);
+    font-size: 8px;
+    top: 7px;
+  }
+
+  /* ── Hobby ── */
+  .cube-wrap {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .cube-stat { text-align: center; }
+  .cube-num {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+  .cube-num.big  { font-size: clamp(72px, 12vw, 130px); }
+  .cube-num.dim  { font-size: clamp(48px, 8vw, 88px); opacity: 0.5; }
+  .cube-label {
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-top: 8px;
+  }
+  .cube-arrow { color: rgba(201,168,76,0.3); font-size: 28px; }
+
+  /* ── Quotes ── */
+  .quote-wrap {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  .quote-box {
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 32px 52px;
+    position: relative;
+    background: linear-gradient(135deg, rgba(201,168,76,0.07), transparent);
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .quote-box:hover {
+    box-shadow: 0 0 30px rgba(201,168,76,0.15);
+    transform: translateY(-3px);
+  }
+  .quote-box::before {
+    content: '"';
+    position: absolute;
+    top: -18px; left: 16px;
+    font-size: 56px;
+    color: var(--gold);
+    font-family: serif;
+    line-height: 1;
+    opacity: 0.5;
+  }
+  .quote-text {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(20px, 2.8vw, 30px);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── Goal ── */
+  .goal-box {
+    border: 1px solid var(--gold);
+    border-radius: 14px;
+    padding: 48px 72px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(10,10,18,0.95));
+    position: relative;
+    overflow: hidden;
+    max-width: 600px;
+    width: 100%;
+  }
+  .goal-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.13), transparent 70%);
+    pointer-events: none;
+  }
+  .goal-tag {
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  .goal-main {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(22px, 3.5vw, 40px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff 0%, var(--gold-light) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+  .goal-sub {
+    font-size: 14px;
+    color: #a09070;
+    margin-top: 18px;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Footer ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid rgba(201,168,76,0.12);
+    font-size: 12px;
+    color: rgba(201,168,76,0.35);
+    letter-spacing: 3px;
+  }
+
+  /* ── Scroll-reveal ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    nav { padding: 12px 20px; }
+    .nav-links { display: none; }
+    .hero-frame { padding: 40px 28px; }
+    section { padding: 100px 20px 60px; }
+    .goal-box { padding: 36px 28px; }
+    .info-table { min-width: unset; }
+  }
+</style>
+</head>
+<body>
+
+<div id="top-line"></div>
+<div id="stars-bg"></div>
+
+<!-- Navigation -->
+<nav>
+  <span class="nav-name">小柳 裕太郎</span>
+  <ul class="nav-links">
+    <li><a href="#profile">Profile</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#hobby">Hobby</a></li>
+    <li><a href="#motto">Motto</a></li>
+    <li><a href="#goal">Goal</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-frame reveal">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <div class="section-label">Self Introduction</div>
+      <h1>小柳 裕太郎</h1>
+      <div class="divider"></div>
+      <div class="subtitle">足立店 &nbsp;|&nbsp; 薬局長</div>
+    </div>
+  </section>
+
+  <!-- Profile -->
+  <section id="profile">
+    <div class="section-label reveal">Profile</div>
+    <h2 class="reveal">基本情報</h2>
+    <div class="divider reveal"></div>
+    <table class="info-table reveal">
+      <tr><td>氏&emsp;名</td><td>小柳 裕太郎</td></tr>
+      <tr><td>所属店舗</td><td>足立店</td></tr>
+      <tr><td>役&emsp;職</td><td>薬局長</td></tr>
+      <tr><td>出 身 地</td><td>東京都 葛飾区</td></tr>
+      <tr><td>出身大学</td><td>日本大学</td></tr>
+    </table>
+  </section>
+
+  <!-- Work -->
+  <section id="work">
+    <div class="section-label reveal">Work</div>
+    <h2 class="reveal">仕事について</h2>
+    <div class="divider reveal"></div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="card-title">CURRENT ROLE</div>
+        <p>足立店の薬局長として、スタッフマネジメントと患者さまへの薬学的ケアを担当。薬局長就任からまだ日が浅く、毎日が学びの連続です。</p>
+      </div>
+      <div class="card reveal" style="transition-delay:0.15s">
+        <div class="card-title">FOCUS AREA — 地域連携・多職種連携</div>
+        <ul>
+          <li>医師・看護師・ケアマネジャーなど多職種との顔の見える関係づくり</li>
+          <li>地域のかかりつけ薬局として、患者さまが安心できる療養環境の整備</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hobby -->
+  <section id="hobby">
+    <div class="section-label reveal">Hobby</div>
+    <h2 class="reveal">趣味</h2>
+    <div class="divider reveal"></div>
+    <div class="subtitle reveal" style="margin-bottom:32px;">ルービックキューブ</div>
+    <div class="cube-wrap reveal">
+      <div class="cube-stat">
+        <div class="cube-num big">15</div>
+        <div class="cube-label">秒 — 最速記録</div>
+      </div>
+      <div class="cube-arrow">→</div>
+      <div class="cube-stat">
+        <div class="cube-num dim">50</div>
+        <div class="cube-label">秒 — 現在（リハビリ中）</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Motto -->
+  <section id="motto">
+    <div class="section-label reveal">Motto</div>
+    <h2 class="reveal">好きな言葉</h2>
+    <div class="divider reveal"></div>
+    <div class="quote-wrap">
+      <div class="quote-box reveal">
+        <div class="quote-text">ガンガンいこうぜ</div>
+      </div>
+      <div class="quote-box reveal" style="transition-delay:0.15s">
+        <div class="quote-text">いのちだいじに</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Goal -->
+  <section id="goal">
+    <div class="section-label reveal">Goal 2026</div>
+    <h2 class="reveal">今年の目標</h2>
+    <div class="divider reveal"></div>
+    <div class="goal-box reveal">
+      <div class="goal-tag">TARGET CERTIFICATION</div>
+      <div class="goal-main">心不全療養指導士<br>の取得</div>
+      <div class="divider-long"></div>
+      <div class="goal-sub">地域の患者さまに、より専門的なサポートができるように。</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 &nbsp;小柳 裕太郎</span>
+</footer>
+
+<script>
+  // Stars
+  const bg = document.getElementById('stars-bg');
+  for (let i = 0; i < 150; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 2.5 + 0.5;
+    s.style.cssText = `
+      width:${sz}px;height:${sz}px;
+      top:${Math.random()*100}%;left:${Math.random()*100}%;
+      --dur:${(Math.random()*3+2).toFixed(1)}s;
+      animation-delay:${(Math.random()*5).toFixed(1)}s;
+    `;
+    bg.appendChild(s);
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
